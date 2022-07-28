@@ -1,7 +1,7 @@
 // Package graphql provides a low level GraphQL client.
 //
 //  // create a client (safe to share across requests)
-//  client := graphql.NewClient("https://machinebox.io/graphql")
+//  client := graphql.NewClient("https://jana19-dev.io/graphql")
 //
 //  // make a request
 //  req := graphql.NewRequest(`
@@ -27,7 +27,7 @@
 //
 // To specify your own http.Client, use the WithHTTPClient option:
 //  httpclient := &http.Client{}
-//  client := graphql.NewClient("https://machinebox.io/graphql", graphql.WithHTTPClient(httpclient))
+//  client := graphql.NewClient("https://jana19-dev.io/graphql", graphql.WithHTTPClient(httpclient))
 package graphql
 
 import (
