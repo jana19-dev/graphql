@@ -25,9 +25,9 @@
 //
 // Specify client
 //
-// To specify your own http.Client, use the WithHTTPClient option:
-//  httpclient := &http.Client{}
-//  client := graphql.NewClient("https://jana19-dev.io/graphql", graphql.WithHTTPClient(httpclient))
+// To specify your own pester.Client, use the WithHTTPClient option:
+//  httpclient := &pester.Client{}
+//  client := graphql.NewClient("https://machinebox.io/graphql", graphql.WithHTTPClient(httpclient))
 package graphql
 
 import (
@@ -40,12 +40,13 @@ import (
 	"net/http"
 
 	"github.com/pkg/errors"
+	"github.com/sethgrid/pester"
 )
 
 // Client is a client for interacting with a GraphQL API.
 type Client struct {
 	endpoint         string
-	httpClient       *http.Client
+	httpClient       *pester.Client
 	useMultipartForm bool
 
 	// closeReq will close the request body immediately allowing for reuse of client
@@ -67,7 +68,7 @@ func NewClient(endpoint string, opts ...ClientOption) *Client {
 		optionFunc(c)
 	}
 	if c.httpClient == nil {
-		c.httpClient = http.DefaultClient
+		c.httpClient = pester.New()
 	}
 	return c
 }
@@ -221,10 +222,10 @@ func (c *Client) runWithPostFields(ctx context.Context, req *Request, resp inter
 	return nil
 }
 
-// WithHTTPClient specifies the underlying http.Client to use when
+// WithHTTPClient specifies the underlying pester.Client to use when
 // making requests.
 //  NewClient(endpoint, WithHTTPClient(specificHTTPClient))
-func WithHTTPClient(httpclient *http.Client) ClientOption {
+func WithHTTPClient(httpclient *pester.Client) ClientOption {
 	return func(client *Client) {
 		client.httpClient = httpclient
 	}
